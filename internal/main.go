@@ -4,17 +4,17 @@
 package main
 
 import (
-	"os"
 	"bufio"
-	"log"
+	"bytes"
 	"fmt"
+	"go/format"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"os"
 	"strings"
 	"text/template"
-	"go/format"
-	"bytes"
-	"net/http"
 	"time"
-	"io/ioutil"
 )
 
 const rawFile = "https://raw.githubusercontent.com/mysql/mysql-server/5.7/sql/share/errmsg-utf8.txt"
@@ -94,7 +94,7 @@ func main() {
 			parts[0] = strings.Trim(parts[0], ",")
 			txt = parts[0]
 
-			// this prepared a Go constant definition.
+			// this prepares a Go constant definition.
 			// to be inserted into a multi-line const ( ... ) statement.
 			decl := fmt.Sprintf("%s MySQLError = %d", txt, currentError)
 
